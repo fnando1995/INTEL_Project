@@ -1,0 +1,4 @@
+notes:
+ROJO --> A
+VERDE -> B
+AZUL --> C

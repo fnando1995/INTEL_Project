@@ -1,0 +1,8 @@
+PERSON:
+  from_to:
+    - A_B
+    - B_A
+    - A_C
+    - B_C
+    - C_A
+    - C_A
