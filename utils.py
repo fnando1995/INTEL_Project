@@ -1,6 +1,7 @@
 import argparse
-import cv2
+
 from network.utils import *
+from tracker.tracker import Tracker
 
 def get_args():
     parser = argparse.ArgumentParser("Load an IR into the Inference Engine")
@@ -23,6 +24,12 @@ def put_in_frame(filtered_dets, image):
         cv2.rectangle(image, (int(x1), int(y1)), (int(x2), int(y2)), (0, 0, 255), 1)
     return image
 
+def put_tracked_in_frame(tracked,frame):
+    for trk in tracked:
+        bbox = trk.get_state()[0]
+        startX, startY,endX, endY = np.array(bbox[:4]).astype(int)
+        cv2.rectangle(frame, (startX, startY), (endX, endY), (0, 255, 255), 2)
+    return frame
 
 def run_project_demo(args):
     # Load video
@@ -31,6 +38,8 @@ def run_project_demo(args):
     # Load network (for CPU or PI/NCS2)
     pi_usage = args.pi
     net,net_input_shape = load_person_detection_retail_0013_to_IE(pi_usage)
+    # Load Tracker
+    tracker = Tracker("/home/laptop/Desktop/proyectos/INTEL_Project/figures/512.npy")
     # Loop in video
     FLAG = True
     while FLAG:
@@ -40,8 +49,11 @@ def run_project_demo(args):
             FLAG = False
             continue
         filtered_detections = get_results_from_person_detection_retail_0013(net,net_input_shape,frame)
-        frame_with_filtered_detections = put_in_frame(filtered_detections,frame)
-        cv2.imshow("video",frame_with_filtered_detections)
+        # frame_with_filtered_detections = put_in_frame(filtered_detections,frame)
+        # cv2.imshow("detecting", frame_with_filtered_detections)
+        tracked_detections  = tracker.track_dets(filtered_detections)
+        frame_with_tracked_detections = put_tracked_in_frame(tracked_detections,frame)
+        cv2.imshow("tracking",frame_with_tracked_detections)
         key = cv2.waitKey(1) & 0xFF
         if key == ord("q"):
             break
