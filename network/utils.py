@@ -9,9 +9,9 @@ def load_person_detection_retail_0013_to_IE(PI=False):
     model_xml = "/".join(os.path.abspath(__file__).split("/")[
                          :-1]) + "/person-detection-retail-0013/CHANGE/person-detection-retail-0013.xml"
     if PI:
-        model_xml=model_xml.replace("/CHANGE/","FP16")
+        model_xml=model_xml.replace("/CHANGE/","/FP16/")
     else:
-        model_xml=model_xml.replace("/CHANGE/","FP32")
+        model_xml=model_xml.replace("/CHANGE/","/FP32/")
 
     plugin = IECore()
     model_bin = os.path.splitext(model_xml)[0] + ".bin"
