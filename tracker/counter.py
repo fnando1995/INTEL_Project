@@ -20,23 +20,11 @@ class Counter():
 
 
 
-    # def saveDataInfo(self,fecha,inicio_hora,fin_hora):
-    #     data        =   self.get_data_as_string()
-    #     file        =   open(FILE_DATA_PATH_TODAY)
-    #     lines       =   file.readlines()
-    #     file.close()
-    #     A_F, A_IH, A_FH = str(fecha), str(inicio_hora), str(fin_hora)
-    #     if len(lines)==0:
-    #         lines.append(A_F + "," + A_IH + "," + A_FH + "," + data + "\n")
-    #     F,IH,FH     =   lines[-1].split(",")[:3]
-    #     if F==A_F and IH == A_IH and FH == A_FH:
-    #         "Se esta guardando la actualizacion de un ciclo"
-    #         lines[-1]  =  A_F + "," + A_IH + "," + A_FH + "," + data + "\n"
-    #     else:
-    #         lines.append(A_F + "," + A_IH + "," + A_FH + "," + data + "\n")
-    #     file=open(FILE_DATA_PATH_TODAY,"w")
-    #     file.writelines(lines)
-    #     file.close()
+    def saveDataInfo(self,filepath):
+        data        =   self.get_data_as_string()
+        file=open(filepath,"w")
+        file.writelines(data)
+        file.close()
 
     def get_data_as_string(self):
         string=""
@@ -66,7 +54,7 @@ class Counter():
         else:
             line = "obj/rel".ljust(self.max_rel_long+2," ")
             for relation in self.all_rel:
-                line += relation.rjust(self.max_rel_long+2," ")
+                line += relation[-3:].rjust(self.max_rel_long+2," ")
             return line
 
     def PutDataInFrame(self,frame):

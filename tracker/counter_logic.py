@@ -13,7 +13,8 @@ def cl_set_counter_data(datadict):
         for relation, parameters in regions_relations_of_object.items():
             if relation == "from_to":
                 for parameter in parameters:
-                    relation_full_name = relation + "__" + parameter[0] + "_" + parameter[1]
+                    side1,side2 = parameter.split("_")
+                    relation_full_name = relation + "__" + side1 + "_" + side2
                     data_saver[object][relation_full_name] = 0
                     all_relations.append(relation_full_name)
             elif False:
@@ -25,7 +26,7 @@ def cl_set_counter_data(datadict):
     all_relations = sorted(list(set(all_relations)))
     relations_per_object = {objeto: sorted(list(data_saver[objeto].keys())) for objeto in
                             sorted(list(objects_to_detect))}
-    max_rel_long = max([len(i) for i in all_relations])
+    max_rel_long = max([len(i[-3:]) for i in all_relations])
 
     return objects_to_detect, data_saver, all_relations, relations_per_object, max_rel_long
 
