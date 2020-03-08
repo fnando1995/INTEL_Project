@@ -41,9 +41,6 @@ def associate_detections_to_trackers(detections, trackers, iou_threshold=0.3):
     for d, det in enumerate(detections):
         for t, trk in enumerate(trackers):
             iou_matrix[d, t] = iou(det, trk)
-            # LAB MENCIONO QUE PUEDE SER BUENO CAMBIAR POR
-            # OTRO METODO PARA IDENTIFICAR SI LAS DETECIONES
-            # SE ASOCIONAN AL TRACKER
 
     matched_indices = linear_assignment(-iou_matrix)
 
