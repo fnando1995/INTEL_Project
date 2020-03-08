@@ -96,7 +96,7 @@ To handle changes in regions, there is a file **$PATH/figures/tools_for_regions.
 to generate the ".npy" file of the regions. Also it creates an image with the regions just to see 
 it everytime we need.
 
-### Future improves
+### Future improvements
 
 * NCS2 has informed to fail when temperature goes over 40° inside. Then the code should handles
 sudden exits.
