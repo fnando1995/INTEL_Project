@@ -51,13 +51,13 @@ def run_project_demo(args):
             FLAG = False
             continue
         filtered_detections = get_results_from_person_detection_retail_0013(net,net_input_shape,frame)
-        frame_with_filtered_detections = put_in_frame(filtered_detections,frame)
-        cv2.imshow("detecting", frame_with_filtered_detections)
-        # tracked_detections  = tracker.track_dets(filtered_detections)
-        # frame_with_tracked_detections = put_tracked_in_frame(tracked_detections,frame)
-        # cv2.imshow("tracking", frame_with_tracking_regions_and_counting)
+        # frame_with_filtered_detections = put_in_frame(filtered_detections,frame)
+        # cv2.imshow("detecting", frame_with_filtered_detections)
+        tracked_detections  = tracker.track_dets(filtered_detections)
+        frame_with_tracked_detections = put_tracked_in_frame(tracked_detections,frame)
+        cv2.imshow("tracking", frame_with_tracked_detections)
         # frame_with_tracking_regions_and_counting = tracker.put_tracking_in_frame_with_regions_with_couting(frame)
-
+        # cv2.imshow("tracking", frame_with_tracking_regions_and_counting)
         key = cv2.waitKey(1) & 0xFF
         if key == ord("q"):
             break
