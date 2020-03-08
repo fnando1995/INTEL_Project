@@ -7,6 +7,8 @@ of person/car/bus/motorcicle/etc...).
 For this DEMO project there is one video taken from a real store (all credits reserved). The 
 video is from an external camera (not CCTV). 
 
+![alt text](data/images/img4.png "system")
+
 The formal usage of this will not be in a already created store place, but somewhere where
 is the opportunity to put a store, but first a traffic measurement is needed.
 
@@ -58,6 +60,11 @@ python3 run.py
 ~~~
 
 You will be using default values to load network in CPU. check the directories for the files.
+
+![alt text](data/images/img3.png "system")
+
+
+
 
 ###### note: This project is devised to work at MYRIAD VPU, but in case that mounting the rasp+NCS2+CAM takes to much time, this DEMO also work with intel CPU.
 
