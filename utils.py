@@ -39,7 +39,7 @@ def run_project_demo(args):
     pi_usage = args.pi
     net,net_input_shape = load_person_detection_retail_0013_to_IE(pi_usage)
     # Load Tracker
-    tracker = Tracker("/home/laptop/Desktop/proyectos/INTEL_Project/figures/512.npy")
+    tracker = Tracker("/".join(os.path.abspath(__file__).split("/")[:-1]) + "/figures/512.npy")
     # Loop in video
     FLAG = True
     while FLAG:
