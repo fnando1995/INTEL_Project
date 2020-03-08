@@ -1,6 +1,6 @@
-import yml
+import yaml
 
 def read_yml(yml_file):
     with open(yml_file) as file:
-        data = yml.load(file, Loader=yml.FullLoader)
+        data = yaml.load(file, Loader=yaml.FullLoader)
     return data
