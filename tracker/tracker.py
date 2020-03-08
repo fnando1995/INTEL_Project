@@ -16,7 +16,7 @@ class Tracker(object):
 
     def track_dets(self,dets):
         self.tracked_detections,to_check_trks = self.algorithm.update(dets,self.tracked_detections,self.regions_controller)
-        self.check_trks_paths(to_check_trks)
+        # self.check_trks_paths(to_check_trks)
         return self.tracked_detections
 
 
