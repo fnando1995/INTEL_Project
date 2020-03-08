@@ -27,8 +27,10 @@ def put_in_frame(filtered_dets, image):
 def put_tracked_in_frame(tracked,frame):
     for trk in tracked:
         bbox = trk.get_state()[0]
+        id = str(trk.get_id())
         startX, startY,endX, endY = np.array(bbox[:4]).astype(int)
         cv2.rectangle(frame, (startX, startY), (endX, endY), (0, 255, 255), 2)
+        cv2.putText(frame,id,(startX,startY),0,10,(0,255,255),3)
     return frame
 
 def run_project_demo(args):
