@@ -18,5 +18,10 @@ python3 run.py
 
 ##### note: This project is capable or running in CPU or VPU in case that mounting the rasp+NCS2+CAM takes to much time
 
+soft-nms  https://arxiv.org/pdf/1704.04503.pdf
 
-  
+sort    https://arxiv.org/pdf/1602.00763.pdf
+
+kalman-filters http://web.mit.edu/kirtley/kirtley/binlustuff/literature/control/Kalman%20filter.pdf
+
+hungarian-algorithm http://www.or.deis.unibo.it/staff_pages/martello/TechReportEgervary.pdf
