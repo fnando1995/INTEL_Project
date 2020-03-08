@@ -5,25 +5,26 @@ from tracker.tracker import Tracker
 
 def get_args():
     parser = argparse.ArgumentParser("Load an IR into the Inference Engine")
-    pi_desc = "True for use in raspberry pi"
-    video_desc = "fullpath for video to be used"
-    save_file_desc = "fullpath for text file to save countings"
-    figure_file_desc = "fullpath for figure file .npy to generate regions"
+    base_dir = "/".join(os.path.abspath(__file__).split("/")[:-1])
+    pi_desc = "boolean for load neural network in format FP16 and use device MYRIAD or format FP32 ans use CPU- default FALSE"
+    video_desc = "fullpath for video to be used - default '$PATH/data/videos/video.avi'"
+    save_file_desc = "fullpath for text file to save countings - default '$PATH/data/texts/save.txt'"
+    figure_file_desc = "fullpath for figure file .npy to generate regions - default '$PATH/figures/view1.npy'"
     parser.add_argument("-pi",
                         type=bool,
                         default=False,
                         help=pi_desc)
     parser.add_argument("-video_filepath",
                         type=str,
-                        default="/".join(os.path.abspath(__file__).split("/")[:-1]) + "/data/videos/video.avi",
+                        default= base_dir+ "/data/videos/video.avi",
                         help=video_desc)
     parser.add_argument("-save_filepath",
                         type=str,
-                        default="/".join(os.path.abspath(__file__).split("/")[:-1]) + "/data/texts/save.txt",
+                        default= base_dir + "/data/texts/save.txt",
                         help=save_file_desc)
     parser.add_argument("-figure_filepath",
                         type=str,
-                        default="/".join(os.path.abspath(__file__).split("/")[:-1]) + "/figures/512.npy",
+                        default= base_dir + "/figures/view1.npy",
                         help=figure_file_desc)
     args = parser.parse_args()
     return args

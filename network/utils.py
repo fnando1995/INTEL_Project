@@ -7,28 +7,38 @@ from network.classes import classes
 
 def load_person_detection_retail_0013_to_IE(PI=False):
     cpu_extension = "/opt/intel/openvino/deployment_tools/inference_engine/lib/intel64/libcpu_extension_sse4.so"
-    model_xml = "/".join(os.path.abspath(__file__).split("/")[
-                         :-1]) + "/person-detection-retail-0013/CHANGE/person-detection-retail-0013.xml"
+    model_xml = "/".join(os.path.abspath(__file__).split("/")[:-1]) + "/person-detection-retail-0013/CHANGE/person-detection-retail-0013.xml"
+    model_bin = os.path.splitext(model_xml)[0] + ".bin"
     if PI:
         model_xml=model_xml.replace("/CHANGE/","/FP16/")
     else:
         model_xml=model_xml.replace("/CHANGE/","/FP32/")
 
     plugin = IECore()
-    model_bin = os.path.splitext(model_xml)[0] + ".bin"
     net = IENetwork(model=model_xml, weights=model_bin)
-    if cpu_extension:
+
+    if cpu_extension and not PI:
         plugin.add_extension(cpu_extension, "CPU")
-    supported_layers = plugin.query_network(network=net, device_name="CPU")
+
+    if not PI:
+        supported_layers = plugin.query_network(network=net, device_name="CPU")
+    else:
+        supported_layers = plugin.query_network(network=net, device_name="MYRIAD")
     unsupported_layers = [l for l in net.layers.keys() if l not in supported_layers]
     if len(unsupported_layers) != 0:
         print("Unsupported layers found: {}".format(unsupported_layers))
         print("Check whether extensions are available to add to IECore.")
         exit(1)
-    exec_net = plugin.load_network(net, "CPU")
+
+
+    if not PI:
+        exec_net = plugin.load_network(net, "CPU")
+    else:
+        exec_net = plugin.load_network(net, "MYRIAD")
+
     input_blob = next(iter(net.inputs))
     input_shape = net.inputs[input_blob].shape
-    print('loaded completly')
+    print('loaded completly using',"CPU" if PI else "MYRIAD -VPU")
     return exec_net, input_shape
 
 def preprocessing(input_image, height, width):
