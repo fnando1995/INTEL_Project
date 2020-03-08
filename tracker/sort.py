@@ -5,8 +5,8 @@ from sklearn.utils.linear_assignment_ import linear_assignment
 import warnings
 
 warnings.filterwarnings('ignore')
-import modules.regions_controllers.polygon as polygon
-from modules.trackers.kalman_filters import KalmanBoxTracker
+import tracker.polygon as polygon
+from tracker.kalman_filter import KalmanBoxTracker
 
 
 def iou(bb_test, bb_gt):
