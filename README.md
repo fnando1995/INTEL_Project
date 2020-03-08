@@ -60,13 +60,13 @@ As you may see, all arguments are optionals, this means we can run it by:
 python3 run.py
 ~~~
 
-You will be using default values to load network in CPU. check the directories for the files.
+Most of the parameters are path to a especific file like video, figure (for regions) or text file
+to save the information of the counting. 
+
+If you do not change the default settings, you will be using default values to load network in 
+CPU. check the directories for the files.
 
 ![alt text](data/images/img3.png "system")
-
-
-
-
 ###### note: This project is devised to work at MYRIAD VPU, but in case that mounting the rasp+NCS2+CAM takes to much time, this DEMO also work with intel CPU.
 
 
@@ -86,7 +86,7 @@ because it can run in real-time, also for the non-maximum suppression was select
 [SOFT-NMS](https://arxiv.org/pdf/1704.04503.pdf) because it improves normal nms and will
 dilate detections elimination too soon (because the view could be overcrowded).
 
-Finally, to keep in memory the important data (counting), a class **Counter** was created which
+To keep in memory the important data (counting), a class **Counter** was created which
 handles the read of a YAML file (were information about classes to be detected could be inserted)
 and to have the logic of the counting (this is because each site where the camera is implemented,
 new regions will be created). This class will work simultaneously with class **Region_Controller** 
@@ -95,6 +95,13 @@ and **SORT**, inside a class **Tracker**.
 To handle changes in regions, there is a file **$PATH/figures/tools_for_regions.py** which helps
 to generate the ".npy" file of the regions. Also it creates an image with the regions just to see 
 it everytime we need.
+
+You  may notice that if the "tracked detections" (or "trk" that are kalman-filter instances) do not
+generate an alert of counting while they are "alive" (this is meant for a trk that keep being 
+relationated with a new detections), if the "trk" dies (this means that the trk has not being 
+relationated with new detections for more than a setted number of frames), then the counter checks
+its "path" to verify if any of the relations especify at the YAML file where done (this path is a list 
+of the regions where the "trk" has passed, like ["A","B","A","C"] and so on).
 
 ### Future improvements
 
