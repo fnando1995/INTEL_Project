@@ -13,12 +13,13 @@ The formal usage of this will not be in a already created store place, but somew
 is the opportunity to put a store, but first a traffic measurement is needed.
 
 Normally, this traffic measurement is evaluated for a couple of hours or only the hours that
-claim to be of greater traffic. But as notice, this is not a totally right because is not complete.
-another way is to set a person to count person with pen and paper, but this hace two disadvantages: 
-A person can get tired, and is not cheap.
+claim to be of greater traffic. But as notice, this is not totally right because is not complete.
+Other way to try to do this is by setting someone to count with pen and paper, but this has two 
+disadvantages: A person can get tired, and is not cheap. (If the number of objects raises, then 
+a normal person could have problems doing this correctly).
 
-This product will only need a high place to be located and electricity. Now WiFi is needed after 
-configuration. 
+This product will only need a high place to be located and electricity. No WiFi is needed after 
+configuration is done. 
 
 
 
@@ -100,8 +101,10 @@ it everytime we need.
 * NCS2 has informed to fail when temperature goes over 40° inside. Then the code should handles
 sudden exits.
 * System cage just be created to endure sun, water, snow; but also keep the insides free of heat
-as much as posible.
+as much as possible.
 * Raspberry Pi 4 suits better for NCS2 than Raspberry Pi 3, because RP4 has usb 3.0 ports.
+* Not all places could go as high as this network needs, to having a bunch of networks prepared 
+for different types of location will help in implementation.
 * Trying to "process" the whole day in one bunch could be hard, then use batches of (let's say) 
 30 minutes. If in any batch the NCS2 fails or camera or anything, the system (raspi) could reboot 
 (cause a reboot solve anything XD ) and retake the couting depending of the time.
@@ -109,8 +112,12 @@ as much as posible.
 * Labor time, because at 2AM a store will not be open. The product could be ON during the day 
 and at night just hibernate.
 * Tracking is not computationally high-costed, but it delays a bit, so this could be improved saving
-detections, and at the end of the labor time using the detections saved to start the "counting" and 
-finallyto save to databases.
+detections, and at the end of the labor time using the detections saved to start the "counting" and
+finally saving the information to databases. 
+* Tracking depends on detections, but SORT also could be improved or changed. This depends on the way
+we need to deploy the product, we could have a better algorithm of tracking (more accurate but also 
+slower) if this process is done after the labor time suggested before. 
+
 * Daily information sending by incluiding a SMS with Internet.
 
 
