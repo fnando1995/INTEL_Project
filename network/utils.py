@@ -3,6 +3,7 @@ from pathlib import Path
 from openvino.inference_engine import IECore, IENetwork
 import numpy as np
 import cv2
+from network.classes import classes
 
 def load_person_detection_retail_0013_to_IE(PI=False):
     cpu_extension = "/opt/intel/openvino/deployment_tools/inference_engine/lib/intel64/libcpu_extension_sse4.so"
@@ -87,7 +88,7 @@ def get_results_from_person_detection_retail_0013(exec_net, input_shape ,image, 
             if det[0] == -1:
                 break
             else:
-                if det[1] in [1,2,3,4] and float(det[2]) >= dets_confidence:    #[1-person,2-bicycle,3-car,4-motorbike]
+                if det[1] in list(classes.keys()) and float(det[2]) >= dets_confidence:
                     x1, y1, x2, y2 = det[3] * w, det[4] * h, det[5] * w, det[6] * h
                     dets_fil.append([x1, y1, x2, y2, round(float(det[2]), 4), int(det[1])])
         dets_fil = nms(dets_fil)

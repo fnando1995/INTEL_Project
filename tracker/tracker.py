@@ -1,6 +1,6 @@
 from tracker.sort import Sort
 from tracker.region_controller import RegionsController
-# from tracker.counter import Counter
+from tracker.counter import Counter
 
 
 import cv2
@@ -11,7 +11,7 @@ class Tracker(object):
         self.algorithm          =   Sort()
         self.tracked_detections =   []
         self.regions_controller =   RegionsController(figure_filepath)
-        # self.counter            =   Counter(monitor_datadict,CLASSES_TO_BE_DETECTED)
+        self.counter            =   Counter(figure_filepath.replace(".npy",".yml"))
 
 
     def track_dets(self,dets):
@@ -20,8 +20,9 @@ class Tracker(object):
         return self.tracked_detections
 
 
+    def put_tracking_in_frame_with_regions_with_couting(self,frame):
+        pass
 
-    #
     # def check_trks_paths(self,list_to_check_trks):
     #     for trk in list_to_check_trks:
     #         self.counter.verify(trk)
