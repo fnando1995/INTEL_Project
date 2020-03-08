@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-# from openvino.inference_engine import IECore, IENetwork
+from openvino.inference_engine import IECore, IENetwork
 import numpy as np
 import cv2
 
